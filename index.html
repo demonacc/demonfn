@@ -7,7 +7,6 @@
 <link rel="icon" href="assets/logo.png">
 
 <style>
-/* ================= ROOT ================= */
 :root{
   --red:#ef4444;
   --red2:#dc2626;
@@ -15,258 +14,118 @@
   --panel:rgba(255,255,255,.06);
   --border:rgba(255,255,255,.12);
   --accent:#f87171;
+  --accent-glow:rgba(239,68,68,0.45);
+  --transition:.35s ease;
+  --font:'Segoe UI',system-ui,sans-serif;
 }
 
-/* ================= RESET ================= */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Segoe UI,system-ui,sans-serif;
-}
-
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;font-family:var(--font);}
 body{
-  background:
-    radial-gradient(circle at top,#240404,transparent 45%),
-    linear-gradient(#020202,#000);
-  color:#fff;
-  overflow-x:hidden;
+  background:radial-gradient(circle at top,#240404,transparent 45%),linear-gradient(#020202,#000);
+  color:#fff;overflow-x:hidden;
 }
 
-/* ================= LOADER ================= */
+/* LOADER */
 #loader{
-  position:fixed;
-  inset:0;
-  background:#000;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
+  position:fixed;inset:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;
 }
-#loader img{
-  width:90px;
-  filter:drop-shadow(0 0 30px var(--red));
-  animation:pulse 1.6s infinite;
-}
-#loader .bar{
-  margin-top:25px;
-  width:220px;
-  height:6px;
-  background:#111;
-  border-radius:10px;
-  overflow:hidden;
-}
-#loader .bar span{
-  display:block;
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,var(--red),var(--red2));
-  animation:load 2.4s forwards;
-}
+#loader img{width:90px;filter:drop-shadow(0 0 30px var(--red));animation:pulse 1.6s infinite;}
+#loader .bar{margin-top:25px;width:220px;height:6px;background:#111;border-radius:10px;overflow:hidden;}
+#loader .bar span{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--red),var(--red2));animation:load 2.4s forwards;}
 @keyframes load{to{width:100%}}
-@keyframes pulse{
-  0%,100%{transform:scale(1);opacity:.7}
-  50%{transform:scale(1.15);opacity:1}
-}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.15);opacity:1}}
 
-/* ================= NAV ================= */
+/* NAV */
 header{
-  position:fixed;
-  top:0;
-  width:100%;
-  z-index:100;
-  backdrop-filter:blur(14px);
-  background:rgba(0,0,0,.65);
+  position:fixed;top:0;width:100%;z-index:100;
+  backdrop-filter:blur(14px);background:rgba(0,0,0,.65);
   border-bottom:1px solid var(--border);
 }
-.nav{
-  max-width:1250px;
-  margin:auto;
-  padding:18px 30px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-.logo{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  font-weight:700;
-}
-.logo img{width:34px}
-
-nav{position:relative}
+.nav{max-width:1250px;margin:auto;padding:18px 30px;display:flex;align-items:center;justify-content:space-between;}
+.logo{display:flex;align-items:center;gap:12px;font-weight:700;}
+.logo img{width:34px;}
+nav{position:relative;}
 nav a{
-  margin:0 16px;
-  color:#aaa;
-  text-decoration:none;
-  cursor:pointer;
-  transition:.25s;
+  margin:0 16px;color:#aaa;text-decoration:none;cursor:pointer;transition:var(--transition);
 }
 nav a.active,nav a:hover{color:var(--red); text-shadow:0 0 8px rgba(239,68,68,.5);}
 .nav-indicator{
-  position:absolute;
-  bottom:-10px;
-  height:3px;
-  background:linear-gradient(90deg,var(--red),var(--red2));
-  border-radius:4px;
-  transition:.35s;
+  position:absolute;bottom:-10px;height:3px;background:linear-gradient(90deg,var(--red),var(--red2));
+  border-radius:4px;transition:var(--transition);
 }
 
 .nav-btn{
-  padding:11px 22px;
-  border-radius:14px;
-  font-weight:700;
-  background:linear-gradient(90deg,var(--red),var(--red2));
-  color:#fff;
-  text-decoration:none;
-  box-shadow:0 0 25px rgba(239,68,68,.45);
-  transition:.3s;
+  padding:12px 28px;border-radius:18px;font-weight:700;background:linear-gradient(90deg,var(--red),var(--red2));
+  color:#fff;text-decoration:none;box-shadow:0 0 25px var(--accent-glow);display:flex;align-items:center;gap:8px;transition:.3s;
 }
-.nav-btn:hover{transform:translateY(-2px)}
+.nav-btn:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 0 35px var(--accent-glow);}
 
-/* ================= SECTIONS ================= */
+/* SECTIONS */
 section{
-  min-height:100vh;
-  padding:150px 20px 80px;
-  display:none;
-  opacity:0;
-  transform:translateY(35px);
+  min-height:100vh;padding:150px 20px 80px;
+  opacity:0;transform:translateY(35px);
   transition:all .6s ease;
+  pointer-events:none;
 }
 section.active{
-  display:block;
-  opacity:1;
-  transform:translateY(0);
+  opacity:1;transform:translateY(0);
+  pointer-events:auto;
 }
 
-/* ================= HERO ================= */
-.hero{
-  max-width:1150px;
-  margin:auto;
-  text-align:center;
-}
+/* HERO */
+.hero{text-align:center;max-width:1150px;margin:auto;}
 .badge{
-  display:inline-block;
-  padding:9px 22px;
+  display:inline-block;padding:9px 22px;
   background:rgba(239,68,68,.15);
   border:1px solid rgba(239,68,68,.35);
-  border-radius:999px;
-  color:#ff9a9a;
-  margin-bottom:28px;
-  font-weight:700;
+  border-radius:999px;color:#ff9a9a;margin-bottom:28px;font-weight:700;
 }
-.hero h1{
-  font-size:68px;
-  line-height:1.05;
-}
-.hero h1 span{
-  background:linear-gradient(90deg,#ff9a9a,var(--red));
-  -webkit-background-clip:text;
-  color:transparent;
-}
-.hero p{
-  max-width:720px;
-  margin:22px auto;
-  font-size:19px;
-  opacity:.9;
-}
+.hero h1{font-size:68px;line-height:1.05;}
+.hero h1 span{background:linear-gradient(90deg,#ff9a9a,var(--red));-webkit-background-clip:text;color:transparent;}
+.hero p{max-width:720px;margin:22px auto;font-size:19px;opacity:.9;}
 
-/* ================= BUTTONS ================= */
-.buttons{margin-top:38px}
-.btn{
-  display:inline-block;
-  padding:15px 32px;
-  border-radius:16px;
-  font-weight:700;
-  text-decoration:none;
-  transition:.25s;
-}
+/* BUTTONS */
+.buttons{margin-top:38px;}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:15px 32px;border-radius:16px;font-weight:700;text-decoration:none;gap:8px;transition:var(--transition);}
 .btn.primary{
   background:linear-gradient(90deg,var(--red),var(--red2));
-  color:#fff;
-  box-shadow:0 0 35px rgba(239,68,68,.55);
+  color:#fff;box-shadow:0 0 35px var(--accent-glow);
+  position:relative;overflow:hidden;
 }
-.btn.secondary{
-  margin-left:12px;
-  border:1px solid var(--red);
-  color:#ffb3b3;
+.btn.primary:hover{
+  transform:translateY(-4px) scale(1.05);
+  box-shadow:0 0 50px var(--accent-glow);
 }
-.btn:hover{transform:translateY(-4px)}
+.btn.secondary{margin-left:12px;border:1px solid var(--red);color:#ffb3b3;}
+.btn i{animation:download-icon 1s infinite linear;}
+@keyframes download-icon{0%,100%{transform:translateY(0);}50%{transform:translateY(-4px);}}
 
-/* ================= CARDS ================= */
-.cards{
-  margin-top:70px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:26px;
-}
+/* CARDS */
+.cards{margin-top:70px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px;}
 .card{
-  padding:30px;
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:22px;
-  transition:.3s;
+  padding:30px;background:var(--panel);border:1px solid var(--border);border-radius:22px;
+  transition:transform .4s ease,box-shadow .4s ease;
 }
 .card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 0 40px rgba(239,68,68,.25);
+  transform:translateY(-10px) scale(1.03);
+  box-shadow:0 0 50px rgba(239,68,68,.25);
 }
 
-/* ================= REVIEWS ================= */
-.review{
-  display:flex;
-  gap:16px;
-  align-items:flex-start;
-  background:rgba(255,255,255,.03);
-  padding:20px;
-  border-radius:20px;
-  border:1px solid var(--border);
-  transition:.3s;
-}
-.review:hover{transform:translateY(-6px); box-shadow:0 0 30px rgba(239,68,68,.2);}
-.avatar{
-  width:54px;
-  height:54px;
-  border-radius:50%;
-  border:2px solid rgba(255,255,255,.2);
-}
-.review-name{
-  font-weight:700;
-  display:flex;
-  gap:6px;
-  align-items:center;
-}
-.verified{
-  width:16px;
-  height:16px;
-  filter:drop-shadow(0 0 4px rgba(239,68,68,.6));
-}
-.review-text{opacity:.9;font-size:15px; margin-top:4px;}
-.stars{color:#facc15;font-size:14px; margin-top:4px;}
+/* REVIEWS */
+.review{display:flex;gap:16px;align-items:flex-start;background:rgba(255,255,255,.03);padding:20px;border-radius:20px;border:1px solid var(--border);transition:transform .4s ease,box-shadow .4s ease;}
+.review:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 0 30px rgba(239,68,68,.2);}
+.avatar{width:54px;height:54px;border-radius:50%;border:2px solid rgba(255,255,255,.2);}
+.review-name{font-weight:700;display:flex;gap:6px;align-items:center;}
+.verified{width:16px;height:16px;filter:drop-shadow(0 0 4px rgba(239,68,68,.6));}
+.review-text{opacity:.9;font-size:15px;margin-top:4px;}
+.stars{color:#facc15;font-size:14px;margin-top:4px;}
 
-/* ================= DISCORD FLOAT ================= */
-.discord{
-  position:fixed;
-  right:22px;
-  bottom:22px;
-  padding:14px 22px;
-  background:#5865F2;
-  border-radius:50px;
-  color:#fff;
-  text-decoration:none;
-  font-weight:700;
-}
-
-/* ================= ANIMATIONS ================= */
-@keyframes fadeInUp{
-  from{opacity:0; transform:translateY(25px);}
-  to{opacity:1; transform:translateY(0);}
-}
+/* DISCORD FLOAT */
+.discord{position:fixed;right:22px;bottom:22px;padding:14px 22px;background:#5865F2;border-radius:50px;color:#fff;text-decoration:none;font-weight:700;transition:var(--transition);}
+.discord:hover{transform:translateY(-4px) scale(1.05);box-shadow:0 0 25px #5865F2;}
 </style>
 </head>
-
 <body>
 
 <!-- LOADER -->
@@ -280,10 +139,7 @@ section.active{
 <!-- NAV -->
 <header>
   <div class="nav">
-    <div class="logo">
-      <img src="assets/logo.png"> szn tweaks
-    </div>
-
+    <div class="logo"><img src="assets/logo.png"> szn tweaks</div>
     <nav>
       <a data-tab="home">Home</a>
       <a data-tab="features">Features</a>
@@ -292,8 +148,7 @@ section.active{
       <a data-tab="faq">FAQ</a>
       <span class="nav-indicator"></span>
     </nav>
-
-    <a class="nav-btn" onclick="download()">Download</a>
+    <a class="nav-btn" id="downloadBtn"><i>⬇</i> Download</a>
   </div>
 </header>
 
@@ -304,7 +159,7 @@ section.active{
     <h1>Unleash<br><span>Maximum Performance</span></h1>
     <p>Boost FPS, reduce latency and unlock your PC’s full potential.</p>
     <div class="buttons">
-      <a class="btn primary" onclick="download()">Download</a>
+      <a class="btn primary" id="downloadBtn2"><i>⬇</i> Download</a>
       <a class="btn secondary" data-tab="features">View Features</a>
     </div>
   </div>
@@ -387,14 +242,15 @@ section.active{
 <a class="discord" href="https://discord.gg/dr3Zpqpm" target="_blank">Discord</a>
 
 <script>
-const DOWNLOAD_LINK="YOUR_DOWNLOAD_LINK";
+const DOWNLOAD_LINK="https://example.com/yourfile.exe"; // Replace with your file
 const tabs=[...document.querySelectorAll("[data-tab]")];
 const sections=[...document.querySelectorAll("section")];
 const indicator=document.querySelector(".nav-indicator");
+const loader=document.getElementById("loader");
 const whoosh=document.getElementById("whoosh");
 
-/* LOADER */
-window.addEventListener("load",()=>setTimeout(()=>loader.style.display="none",2500));
+/* Loader */
+window.addEventListener("load",()=>setTimeout(()=>loader.style.display="none",2000));
 
 function switchTab(id){
   sections.forEach(s=>s.classList.toggle("active",s.id===id));
@@ -403,22 +259,21 @@ function switchTab(id){
   history.replaceState(null,"","#"+id);
   if(whoosh){whoosh.currentTime=0;whoosh.volume=.35;whoosh.play().catch(()=>{});}
 }
-
 function moveIndicator(){
   const a=document.querySelector("nav a.active");
   if(!a) return;
   indicator.style.width=a.offsetWidth+"px";
   indicator.style.left=a.offsetLeft+"px";
 }
-
 tabs.forEach(t=>t.addEventListener("click",()=>switchTab(t.dataset.tab)));
 document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>switchTab(b.dataset.tab)));
-
 switchTab(location.hash.replace("#","")||"home");
 
-function download(){location.href=DOWNLOAD_LINK;}
+/* Download */
+function download(){window.open(DOWNLOAD_LINK,"_blank");}
+document.getElementById("downloadBtn").addEventListener("click",download);
+document.getElementById("downloadBtn2").addEventListener("click",download);
 </script>
 
 </body>
 </html>
-
