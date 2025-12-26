@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>szn tweaks V1</title>
+<title>szn tweaks</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="assets/logo.png">
 
@@ -278,23 +278,12 @@ section.active{
 <audio id="whoosh" src="assets/whoosh.mp3"></audio>
 
 <!-- NAV -->
-<style>
-  .title {
-    color: #ef4444; /* main color */
-    font-size: 3rem;
-    line-height: 1.2;
-  }
-
-  .title span {
-    color: #60a5fa; /* accent color */
-  }
-</style>
-
-<h1 class="title">
-  Unleash<br>
-  <span>Maximum Performance</span>
-</h1>
-
+<header>
+  <div class="nav">
+    <div class="logo">
+      <img src="assets/logo.png" alt="szn tweaks logo"> 
+      <span style="color: #ef4444;">szn tweaks</span>
+    </div>
 
     <nav>
       <a data-tab="home">Home</a>
@@ -308,6 +297,7 @@ section.active{
     <a class="nav-btn" onclick="download()">Download</a>
   </div>
 </header>
+
 
 <!-- HOME -->
 <section id="home" class="active">
@@ -433,6 +423,3 @@ function download(){location.href=DOWNLOAD_LINK;}
 
 </body>
 </html>
-
-
-
