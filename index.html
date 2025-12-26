@@ -7,9 +7,7 @@
 <link rel="icon" href="assets/logo.png">
 
 <style>
-/* =========================================================
-   ROOT VARIABLES
-========================================================= */
+/* ================= ROOT ================= */
 :root{
   --accent:#3b82f6;
   --accent2:#2563eb;
@@ -17,350 +15,168 @@
   --panel:rgba(255,255,255,.06);
   --border:rgba(255,255,255,.12);
 }
-
-/* =========================================================
-   GLOBAL RESET
-========================================================= */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Segoe UI,system-ui,sans-serif;
-}
-
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,system-ui,sans-serif;}
 body{
-  background:
-    radial-gradient(circle at top,#240404,transparent 45%),
-    linear-gradient(#020202,#000);
+  background:radial-gradient(circle at top,#240404,transparent 45%),linear-gradient(#020202,#000);
   color:#fff;
   overflow-x:hidden;
 }
 
-/* =========================================================
-   LOADER
-========================================================= */
+/* ================= LOADER ================= */
 #loader{
-  position:fixed;
-  inset:0;
-  background:#000;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+  position:fixed;inset:0;background:#000;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
   z-index:9999;
   animation:fadeOut 1s forwards;
   animation-delay:2.5s;
 }
+#loader img{width:90px;filter:drop-shadow(0 0 30px var(--accent));animation:pulse 1.6s infinite;}
+#loader .bar{margin-top:25px;width:220px;height:6px;background:#111;border-radius:10px;overflow:hidden;}
+#loader .bar span{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));animation:load 2.4s forwards;}
 
-#loader img{
-  width:90px;
-  filter:drop-shadow(0 0 30px var(--accent));
-  animation:pulse 1.6s infinite;
-}
-
-#loader .bar{
-  margin-top:25px;
-  width:220px;
-  height:6px;
-  background:#111;
-  border-radius:10px;
-  overflow:hidden;
-}
-
-#loader .bar span{
-  display:block;
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
-  animation:load 2.4s forwards;
-}
-
-/* =========================================================
-   NAVBAR
-========================================================= */
+/* ================= NAV ================= */
 header{
-  position:fixed;
-  top:0;
-  width:100%;
-  z-index:100;
+  position:fixed;top:0;width:100%;z-index:100;
   backdrop-filter:blur(14px);
   background:rgba(0,0,0,.65);
   border-bottom:1px solid var(--border);
 }
-
 .nav{
-  max-width:1250px;
-  margin:auto;
-  padding:18px 30px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  max-width:1250px;margin:auto;padding:18px 30px;
+  display:flex;align-items:center;justify-content:space-between;
 }
-
-.logo{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  font-weight:700;
-}
-
+.logo{display:flex;align-items:center;gap:12px;font-weight:700;}
 .logo img{width:34px}
-
-nav{
-  position:relative;
-}
-
+nav{position:relative}
 nav a{
-  margin:0 16px;
-  color:#aaa;
-  text-decoration:none;
-  cursor:pointer;
-  transition:.25s;
+  margin:0 16px;color:#aaa;text-decoration:none;
+  cursor:pointer;transition:.25s;
 }
-
-nav a.active,
-nav a:hover{
-  color:var(--accent);
-}
-
+nav a.active,nav a:hover{color:var(--accent);}
 .nav-indicator{
-  position:absolute;
-  bottom:-10px;
-  height:3px;
+  position:absolute;bottom:-10px;height:3px;
   background:linear-gradient(90deg,var(--accent),var(--accent2));
-  border-radius:4px;
-  transition:.35s;
+  border-radius:4px;transition:.35s;
 }
-
 .nav-btn{
-  padding:11px 22px;
-  border-radius:14px;
-  font-weight:700;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
-  color:#fff;
-  text-decoration:none;
+  padding:11px 22px;border-radius:14px;
+  font-weight:700;background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:#fff;text-decoration:none;
 }
 
-/* =========================================================
-   SECTIONS
-========================================================= */
+/* ================= SECTIONS ================= */
 section{
   min-height:100vh;
   padding:150px 20px 80px;
   display:none;
-  animation:fadeInUp .8s forwards;
+  animation:fadeInUp .7s forwards;
 }
+section.active{display:block;}
 
-section.active{
-  display:block;
-}
-
-/* =========================================================
-   HERO
-========================================================= */
-.hero{
-  max-width:1150px;
-  margin:auto;
-  text-align:center;
-}
-
+/* ================= HERO ================= */
+.hero{max-width:1150px;margin:auto;text-align:center;}
 .badge{
-  display:inline-block;
-  padding:9px 22px;
+  display:inline-block;padding:9px 22px;
   background:rgba(59,130,246,.15);
   border:1px solid rgba(59,130,246,.35);
-  border-radius:999px;
-  color:#a5c9ff;
-  margin-bottom:28px;
-  font-weight:700;
+  border-radius:999px;color:#a5c9ff;
+  margin-bottom:28px;font-weight:700;
 }
-
-.hero h1{
-  font-size:68px;
-  line-height:1.05;
-}
-
+.hero h1{font-size:68px;line-height:1.05;}
 .hero h1 span{
   background:linear-gradient(90deg,#a5c9ff,var(--accent));
-  -webkit-background-clip:text;
-  color:transparent;
+  -webkit-background-clip:text;color:transparent;
 }
+.hero p{max-width:720px;margin:22px auto;font-size:19px;opacity:.9}
 
-/* =========================================================
-   BUTTONS
-========================================================= */
+/* ================= BUTTONS ================= */
 .buttons{margin-top:38px}
-
 .btn{
-  display:inline-block;
-  padding:15px 32px;
-  border-radius:16px;
-  font-weight:700;
-  text-decoration:none;
-  transition:.25s;
+  display:inline-block;padding:15px 32px;border-radius:16px;
+  font-weight:700;text-decoration:none;transition:.25s;
 }
-
 .btn.primary{
   background:linear-gradient(90deg,var(--accent),var(--accent2));
-  color:#fff;
-  box-shadow:0 0 35px rgba(59,130,246,.55);
+  color:#fff;box-shadow:0 0 35px rgba(59,130,246,.55);
 }
-
 .btn.secondary{
-  margin-left:12px;
-  border:1px solid var(--accent);
-  color:#b3d1ff;
+  margin-left:12px;border:1px solid var(--accent);color:#b3d1ff;
 }
 
-/* =========================================================
-   CARDS
-========================================================= */
+/* ================= CARDS ================= */
 .cards{
   margin-top:70px;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:26px;
 }
-
 .card{
-  padding:30px;
-  background:var(--panel);
+  padding:30px;background:var(--panel);
   border:1px solid var(--border);
-  border-radius:22px;
-  transition:.3s;
+  border-radius:22px;transition:.3s;
 }
+.card:hover{transform:translateY(-8px);box-shadow:0 0 40px rgba(59,130,246,.25);}
 
-.card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 0 40px rgba(59,130,246,.25);
-}
-
-/* =========================================================
-   REVIEWS
-========================================================= */
-.review{
-  display:flex;
-  gap:16px;
-  align-items:flex-start;
-}
-
-.avatar{
-  width:54px;
-  height:54px;
-  border-radius:50%;
-  border:2px solid rgba(255,255,255,.2);
-}
-
-.review-name{
-  font-weight:700;
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-
-.verified{
-  width:16px;
-  filter:drop-shadow(0 0 4px rgba(59,130,246,.6));
-}
-
-.review-text{
-  opacity:.9;
-  font-size:15px;
-  margin-top:4px;
-}
-
-.stars{
-  color:#60a5fa;
-  font-size:14px;
-  margin-top:4px;
-}
-
-.review-btns{
-  margin-top:8px;
-  display:flex;
-  gap:8px;
-}
-
+/* ================= REVIEWS ================= */
+.review{display:flex;gap:16px;align-items:flex-start;}
+.avatar{width:54px;height:54px;border-radius:50%;border:2px solid rgba(255,255,255,.2);}
+.review-name{font-weight:700;display:flex;gap:6px;align-items:center;}
+.verified{width:16px}
+.review-text{opacity:.9;font-size:15px;margin-top:4px;}
+.stars{color:#60a5fa;font-size:14px;margin-top:4px;}
+.review-btns{margin-top:8px;display:flex;gap:8px;}
 .review-btns button{
   background:rgba(59,130,246,.25);
-  border:none;
-  padding:6px 14px;
-  border-radius:8px;
-  color:#fff;
+  border:none;padding:6px 14px;border-radius:8px;
+  color:#fff;cursor:pointer;
+}
+
+/* ================= FAQ ================= */
+.faq-item{
+  margin:20px 0;background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:14px;padding:16px;
   cursor:pointer;
 }
+.faq-answer{display:none;margin-top:8px;color:#b3d1ff;font-size:15px;}
 
-/* =========================================================
-   LIVE REVIEW POPUP
-========================================================= */
+/* ================= LIVE REVIEW ================= */
 #liveReview{
-  position:fixed;
-  left:30px;
-  bottom:30px;
-  background:var(--panel);
-  border:1px solid var(--border);
-  padding:16px 20px;
-  border-radius:16px;
-  display:none;
-  animation:fadeInUp .5s;
+  position:fixed;left:30px;bottom:30px;
+  background:var(--panel);border:1px solid var(--border);
+  padding:16px 20px;border-radius:16px;
+  display:none;animation:fadeInUp .5s;
 }
 
-/* =========================================================
-   DISCORD FLOAT
-========================================================= */
+/* ================= DISCORD ================= */
 .discord{
-  position:fixed;
-  right:22px;
-  bottom:22px;
-  padding:14px 22px;
-  background:#5865F2;
-  border-radius:50px;
-  color:#fff;
-  text-decoration:none;
-  font-weight:700;
+  position:fixed;right:22px;bottom:22px;
+  padding:14px 22px;background:#5865F2;
+  border-radius:50px;color:#fff;
+  text-decoration:none;font-weight:700;
 }
 
-/* =========================================================
-   ANIMATIONS
-========================================================= */
-@keyframes fadeInUp{
-  from{opacity:0;transform:translateY(25px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-@keyframes fadeOut{
-  to{opacity:0;visibility:hidden}
-}
-
-@keyframes pulse{
-  0%,100%{transform:scale(1);opacity:.7}
-  50%{transform:scale(1.15);opacity:1}
-}
-
-@keyframes load{
-  to{width:100%}
-}
+/* ================= ANIMATIONS ================= */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeOut{to{opacity:0;visibility:hidden}}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.15);opacity:1}}
+@keyframes load{to{width:100%}}
 </style>
 </head>
 
 <body>
 
-<!-- ===================================================== -->
 <!-- LOADER -->
-<!-- ===================================================== -->
 <div id="loader">
   <img src="assets/logo.png">
   <div class="bar"><span></span></div>
 </div>
 
-<!-- ===================================================== -->
 <!-- NAV -->
-<!-- ===================================================== -->
 <header>
   <div class="nav">
-    <div class="logo">
-      <img src="assets/logo.png"> szn tweaks
-    </div>
+    <div class="logo"><img src="assets/logo.png"> szn tweaks</div>
     <nav>
       <a data-tab="home" class="active">Home</a>
       <a data-tab="features">Features</a>
@@ -373,19 +189,30 @@ section.active{
   </div>
 </header>
 
-<!-- ===================================================== -->
 <!-- HOME -->
-<!-- ===================================================== -->
 <section id="home" class="active">
   <div class="hero">
     <span class="badge">⚡ Extreme Windows Optimization</span>
     <h1>Unleash<br><span>Maximum Performance</span></h1>
+    <p>Boost FPS, reduce latency and unlock your PC’s full potential.</p>
   </div>
 </section>
 
-<!-- ===================================================== -->
+<!-- FEATURES -->
+<section id="features">
+  <div class="hero">
+    <span class="badge">🚀 Features</span>
+    <h1>Built for<br><span>Pure FPS</span></h1>
+    <div class="cards">
+      <div class="card"><h3>Advanced FPS Boosting</h3><p>Higher FPS & smoother gameplay.</p></div>
+      <div class="card"><h3>Latency Fix</h3><p>Lower input delay and ping.</p></div>
+      <div class="card"><h3>Windows Debloat</h3><p>Frees RAM & CPU instantly.</p></div>
+      <div class="card"><h3>Network Optimization</h3><p>Stable & faster connections.</p></div>
+    </div>
+  </div>
+</section>
+
 <!-- REVIEWS -->
-<!-- ===================================================== -->
 <section id="reviews">
   <div class="hero">
     <span class="badge">⭐ Reviews (<span id="reviewCount">0</span>)</span>
@@ -394,49 +221,55 @@ section.active{
   </div>
 </section>
 
-<div id="liveReview"></div>
+<!-- ABOUT -->
+<section id="about">
+  <div class="hero">
+    <span class="badge">ℹ About</span>
+    <h1>Why Choose<br><span>szn tweaks</span></h1>
+    <p>Safe, tested, and built for competitive players.</p>
+  </div>
+</section>
 
+<!-- FAQ -->
+<section id="faq">
+  <div class="hero">
+    <span class="badge">❓ FAQ</span>
+    <h1>Frequently Asked<br><span>Questions</span></h1>
+    <div class="faq-item">Is it safe?<div class="faq-answer">Yes, fully tested.</div></div>
+    <div class="faq-item">Windows support?<div class="faq-answer">Windows 10 & 11</div></div>
+    <div class="faq-item">Is it free?<div class="faq-answer">Yes.</div></div>
+  </div>
+</section>
+
+<div id="liveReview"></div>
 <a class="discord" href="https://discord.gg/dr3Zpqpm" target="_blank">Discord</a>
 
 <script>
-/* =========================================================
-   REVIEW DATA (ONLY EDIT THIS)
-========================================================= */
-const reviewsData = [
+/* ================= REVIEW DATA ================= */
+const reviewsData=[
   {name:"freeze",avatar:"assets/review1.png",text:"Best tweaking tool I’ve ever used. Massive FPS boost.",stars:5,verified:true},
   {name:"max",avatar:"assets/review4.png",text:"No glaze but went from 240 FPS to 360.",stars:5,verified:true},
   {name:"jay",avatar:"assets/review2.png",text:"Went from 200 processes to 65 instantly.",stars:5,verified:true},
   {name:"manman",avatar:"assets/review3.png",text:"Zero input delay now. Fortnite feels insanely smooth.",stars:5,verified:true}
 ];
 
-/* =========================================================
-   RENDER REVIEWS
-========================================================= */
-const container=document.getElementById("reviewsContainer");
+/* ================= RENDER REVIEWS ================= */
+const rc=document.getElementById("reviewsContainer");
 document.getElementById("reviewCount").innerText=reviewsData.length;
-
 reviewsData.forEach(r=>{
-  container.innerHTML+=`
+  rc.innerHTML+=`
     <div class="card review">
       <img src="${r.avatar}" class="avatar">
       <div>
-        <div class="review-name">
-          ${r.name}
-          ${r.verified?`<img src="assets/tick.png" class="verified">`:""}
-        </div>
+        <div class="review-name">${r.name}${r.verified?` <img src="assets/tick.png" class="verified">`:""}</div>
         <div class="stars">${"⭐".repeat(r.stars)}</div>
         <div class="review-text">${r.text}</div>
-        <div class="review-btns">
-          <button>Like</button>
-        </div>
+        <div class="review-btns"><button>Like</button></div>
       </div>
-    </div>
-  `;
+    </div>`;
 });
 
-/* =========================================================
-   LIVE REVIEW POPUPS
-========================================================= */
+/* ================= LIVE REVIEW POPUPS ================= */
 setInterval(()=>{
   const r=reviewsData[Math.floor(Math.random()*reviewsData.length)];
   const box=document.getElementById("liveReview");
@@ -445,15 +278,23 @@ setInterval(()=>{
   setTimeout(()=>box.style.display="none",3500);
 },7000);
 
-/* =========================================================
-   TAB SYSTEM
-========================================================= */
-document.querySelectorAll("[data-tab]").forEach(tab=>{
-  tab.onclick=()=>{
-    document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
-    document.getElementById(tab.dataset.tab).classList.add("active");
-    document.querySelectorAll("nav a").forEach(a=>a.classList.remove("active"));
-    tab.classList.add("active");
+/* ================= TAB SYSTEM ================= */
+const tabs=[...document.querySelectorAll("[data-tab]")];
+const sections=[...document.querySelectorAll("section")];
+tabs.forEach(t=>{
+  t.onclick=()=>{
+    sections.forEach(s=>s.classList.remove("active"));
+    document.getElementById(t.dataset.tab).classList.add("active");
+    tabs.forEach(a=>a.classList.remove("active"));
+    t.classList.add("active");
+  };
+});
+
+/* ================= FAQ TOGGLE ================= */
+document.querySelectorAll(".faq-item").forEach(f=>{
+  f.onclick=()=>{
+    const a=f.querySelector(".faq-answer");
+    a.style.display=a.style.display==="block"?"none":"block";
   };
 });
 </script>
