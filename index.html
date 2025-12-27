@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Premium Website - Checkout</title>
+<title>Premium Website - Perfect UI</title>
 <link rel="icon" href="assets/fn.png">
 <style>
 :root{
@@ -59,17 +59,17 @@ section.active{display:block}
 .stars{color:#60a5fa;font-size:14px;margin-top:4px;}
 
 /* PRODUCT PANEL */
-#productPanel{position:fixed;top:0;right:-100%;width:100%;max-width:900px;height:100%;background:var(--panel);z-index:1000;display:flex;transition:0.5s;box-shadow:-5px 0 25px rgba(0,0,0,.6);}
+#productPanel{position:fixed;top:0;right:-100%;width:100%;max-width:900px;height:100%;background:#111;z-index:1000;display:flex;transition:0.5s;box-shadow:-5px 0 25px rgba(0,0,0,.6);}
 #productPanel.active{right:0;}
 #productPanel .panel-left,.panel-right{flex:1;padding:40px;overflow:auto;}
 #productPanel .panel-left img{width:100%;border-radius:20px;}
 #productPanel .panel-right h2{font-size:2rem;margin-bottom:20px;}
 .license-cards{display:flex;flex-direction:column;gap:12px;margin-bottom:15px;}
-.license-card{padding:15px;border-radius:12px;border:1px solid var(--border);background:var(--bg);cursor:pointer;transition:0.3s;display:flex;justify-content:space-between;align-items:center;}
+.license-card{padding:15px;border-radius:12px;border:1px solid var(--border);background:#222;cursor:pointer;transition:0.3s;display:flex;justify-content:space-between;align-items:center;}
 .license-card.active{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border:none;box-shadow:0 0 15px rgba(59,130,246,.4);}
 .license-card:hover{background:rgba(59,130,246,.15);}
 .quantity{margin:15px 0;display:flex;align-items:center;gap:10px;}
-.quantity input{width:60px;text-align:center;padding:6px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:#fff;}
+.quantity input{width:60px;text-align:center;padding:6px;border-radius:6px;border:1px solid var(--border);background:#222;color:#fff;}
 .add-cart{display:flex;gap:20px;margin-top:20px;}
 .add-cart button{flex:1;padding:12px 25px;border:none;border-radius:12px;font-weight:700;background:var(--accent);color:#fff;cursor:pointer;transition:0.3s;}
 .add-cart button:hover{opacity:0.85;}
@@ -77,95 +77,13 @@ section.active{display:block}
 #productPanel .close-btn:hover{color:var(--accent);}
 
 /* INVOICE */
-<!-- INVOICE -->
-<div id="invoiceModal">
-  <div id="invoiceContent">
-    <h2>Checkout Summary</h2>
-    <p id="invoiceDetails"></p>
-    <p class="key" id="licenseKey"></p>
-    <button onclick="closeInvoice()">Close</button>
-  </div>
-</div>
-
-<style>
-/* INVOICE MODAL - REWORKED */
-#invoiceModal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.85); /* Slight dark overlay */
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-}
-
-#invoiceContent {
-  background: #111; /* Solid dark background */
-  padding: 40px 30px;
-  border-radius: 20px;
-  width: 90%;
-  max-width: 450px;
-  text-align: center;
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
-}
-
-#invoiceContent h2 {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  color: var(--accent);
-}
-
-#invoiceContent p {
-  margin: 12px 0;
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-
-#invoiceContent .key {
-  margin-top: 20px;
-  font-size: 1.4rem;
-  color: #22c55e;
-  font-weight: bold;
-}
-
-#invoiceContent button {
-  margin-top: 25px;
-  padding: 12px 25px;
-  border: none;
-  border-radius: 12px;
-  background: var(--accent);
-  color: #fff;
-  font-weight: 700;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-#invoiceContent button:hover {
-  opacity: 0.85;
-}
-</style>
-
-<script>
-function checkout() {
-  if (!selectedLicense) { alert("Please select a license!"); return; }
-  const qty = document.getElementById('quantityInput').value;
-  const invoice = document.getElementById('invoiceDetails');
-  const keyElem = document.getElementById('licenseKey');
-  
-  document.getElementById('invoiceModal').style.display = 'flex';
-  invoice.innerText = `${qty} x ${selectedLicense}`;
-  keyElem.innerText = 'Generating license key...';
-
-  setTimeout(() => {
-    keyElem.innerText = `License Key: ${generateKey()}`;
-  }, 1500);
-}
-
-function closeInvoice() {
-  document.getElementById('invoiceModal').style.display = 'none';
-}
-</script>
-
+#invoiceModal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:2000;}
+#invoiceContent{background:#111;padding:40px 30px;border-radius:22px;width:90%;max-width:450px;text-align:center;box-shadow:0 0 20px rgba(59,130,246,.4);}
+#invoiceContent h2{font-size:1.8rem;margin-bottom:20px;color:var(--accent);}
+#invoiceContent p{margin:12px 0;font-weight:600;font-size:1.1rem;}
+#invoiceContent .key{margin-top:20px;font-size:1.4rem;color:var(--success);font-weight:bold;}
+#invoiceContent button{margin-top:25px;padding:12px 25px;border:none;border-radius:12px;background:var(--accent);color:#fff;font-weight:700;cursor:pointer;transition:0.3s;}
+#invoiceContent button:hover{opacity:0.85;}
 
 /* ANIMATIONS */
 @keyframes fadeInUp{from{opacity:0;transform:translateY(25px)}to{opacity:1}}
@@ -220,6 +138,7 @@ function closeInvoice() {
 </div>
 </section>
 
+<!-- PRODUCT PANEL -->
 <div id="productPanel">
 <div class="close-btn" onclick="closeProductPanel()">×</div>
 <div class="panel-left">
@@ -243,9 +162,10 @@ function closeInvoice() {
 </div>
 </div>
 
+<!-- INVOICE MODAL -->
 <div id="invoiceModal">
 <div id="invoiceContent">
-<h2>Processing Checkout...</h2>
+<h2>Checkout Summary</h2>
 <p id="invoiceDetails"></p>
 <p class="key" id="licenseKey"></p>
 <button onclick="closeInvoice()">Close</button>
@@ -253,7 +173,7 @@ function closeInvoice() {
 </div>
 
 <script>
-/* NAV + TABS */
+/* NAV */
 const tabs=document.querySelectorAll("[data-tab]");
 const sections=document.querySelectorAll("section");
 const indicator=document.querySelector(".nav-indicator");
@@ -267,20 +187,18 @@ function openProductPanel(){document.getElementById('productPanel').classList.ad
 function closeProductPanel(){document.getElementById('productPanel').classList.remove('active');}
 function selectLicense(el){document.querySelectorAll('.license-card').forEach(c=>c.classList.remove('active'));el.classList.add('active');selectedLicense=el.innerText;}
 
-/* CHECKOUT & INVOICE */
+/* CHECKOUT */
 function generateKey(){return 'XXXX-XXXX-XXXX-XXXX'.replace(/X/g,()=>Math.floor(Math.random()*10));}
 function checkout(){
-if(!selectedLicense){alert("Select a license!");return;}
+if(!selectedLicense){alert("Please select a license!");return;}
 const qty=document.getElementById('quantityInput').value;
 const invoice=document.getElementById('invoiceDetails');
 const keyElem=document.getElementById('licenseKey');
 document.getElementById('invoiceModal').style.display='flex';
 invoice.innerText=`${qty} x ${selectedLicense}`;
-keyElem.innerText='Processing...';
-setTimeout(()=>{keyElem.innerText=`License Key: ${generateKey()}`},2000);
+keyElem.innerText='Generating license key...';
+setTimeout(()=>{keyElem.innerText=`License Key: ${generateKey()}`},1500);
 }
-
-/* CLOSE INVOICE */
 function closeInvoice(){document.getElementById('invoiceModal').style.display='none';}
 
 /* REVIEWS */
@@ -294,4 +212,3 @@ window.onload=()=>setTimeout(()=>document.getElementById("loader").remove(),2500
 
 </body>
 </html>
-
