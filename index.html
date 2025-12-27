@@ -3,105 +3,105 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Perfect Website</title>
+<title>Perfect Premium Website</title>
 <link rel="icon" href="assets/fn.png">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-    /* Root variables */
-    :root {
-        --primary-color: #1e1e2f;
-        --secondary-color: #2e2e40;
-        --accent-color: #ff5e5e;
-        --text-color: #fff;
-        --card-color: #2e2e40;
-        --shadow-color: rgba(0,0,0,0.5);
-    }
+:root {
+  --primary: #111;
+  --secondary: #1f1f2e;
+  --accent: #ff5e5e;
+  --text: #fff;
+  --card: #222;
+  --shadow: rgba(0,0,0,0.6);
+}
+* {margin:0; padding:0; box-sizing:border-box; font-family:'Montserrat', sans-serif;}
+body {background:var(--primary); color:var(--text); overflow-x:hidden;}
 
-    * {margin:0; padding:0; box-sizing:border-box; font-family:'Arial', sans-serif;}
-    body {background: var(--primary-color); color: var(--text-color);}
-    a {text-decoration:none; color: inherit;}
+/* Loader */
+#loader {
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  display:flex; justify-content:center; align-items:center;
+  background: var(--primary); color: var(--accent);
+  font-size:2rem; z-index:9999; transition:opacity 1s ease;
+}
+#loader.hidden {opacity:0; visibility:hidden;}
 
-    /* Loader */
-    #loader {
-        position: fixed; top:0; left:0; width:100%; height:100%;
-        display:flex; justify-content:center; align-items:center;
-        background: var(--primary-color); z-index:9999;
-        font-size:2rem; animation:fadeOut 1s ease forwards; animation-delay:2s;
-    }
-    @keyframes fadeOut {100% {opacity:0; visibility:hidden;}}
+/* Header */
+header {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:20px 50px; background: var(--secondary); position:sticky; top:0; z-index:1000;
+}
+header h1 {color: var(--accent); font-size:1.8rem; font-weight:800;}
+nav a {
+  margin-left:30px; font-weight:600; color: #ccc; position:relative;
+  transition:0.3s;
+}
+nav a:hover, nav a.active {color:var(--accent);}
+nav a.active::after {
+  content:''; position:absolute; bottom:-5px; left:0; width:100%; height:3px; background:var(--accent); border-radius:2px;
+}
 
-    /* Header/Nav */
-    header {
-        display:flex; justify-content:space-between; align-items:center;
-        padding:20px 50px; background: var(--secondary-color);
-        position:sticky; top:0; z-index:100;
-    }
-    header h1 {font-size:1.8rem; font-weight:bold; color: var(--accent-color);}
-    nav a {
-        margin-left:30px; font-weight:bold; transition:0.3s;
-    }
-    nav a:hover {color: var(--accent-color);}
+/* Hero Section */
+.hero {
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  text-align:center; padding:120px 20px; animation:fadeIn 1s ease forwards; opacity:0;
+}
+.hero h2 {font-size:3rem; margin-bottom:10px;}
+.hero p {font-size:1.3rem; color:#aaa;}
 
-    /* Hero/Main Stats */
-    .hero {
-        display:flex; flex-direction:column; justify-content:center; align-items:center;
-        padding:100px 20px; text-align:center;
-        animation:fadeIn 1s ease forwards; opacity:0;
-    }
-    @keyframes fadeIn {100% {opacity:1;}}
-    .hero h2 {font-size:2.5rem; margin-bottom:20px;}
-    .hero p {font-size:1.2rem; color:#ccc;}
+/* Tabs */
+.tab-container {display:flex; justify-content:center; margin:40px 0;}
+.tab-container button {
+  background: var(--secondary); color:#fff; border:none;
+  padding:12px 25px; margin:0 8px; border-radius:10px; cursor:pointer;
+  font-weight:600; transition:0.3s;
+}
+.tab-container button.active, .tab-container button:hover {background:var(--accent);}
 
-    /* Tabs */
-    .tab-container {display:flex; justify-content:center; margin-top:50px;}
-    .tab-container button {
-        background: var(--secondary-color); color:#fff; border:none;
-        padding:10px 20px; margin:0 5px; cursor:pointer;
-        border-radius:10px; font-weight:bold; transition:0.3s;
-    }
-    .tab-container button.active, .tab-container button:hover {
-        background: var(--accent-color);
-    }
+/* Tab Contents */
+.tab-content {display:none; padding:40px 20px; justify-content:center; animation:fadeIn 0.5s ease forwards;}
+.tab-content.active {display:flex; flex-wrap:wrap; gap:40px; justify-content:center;}
 
-    /* Tab Contents */
-    .tab-content {display:none; padding:50px 20px;}
-    .tab-content.active {display:flex; flex-wrap:wrap; justify-content:center; animation:fadeIn 0.5s ease forwards;}
+/* Products Card */
+.product-card {
+  background: var(--card); display:flex; border-radius:20px; padding:30px;
+  width:850px; max-width:95%; box-shadow:0 10px 25px var(--shadow); transition:0.3s;
+}
+.product-card:hover {transform:translateY(-5px);}
+.product-card img {width:300px; border-radius:20px; margin-right:40px;}
 
-    /* Products */
-    .product-card {
-        background: var(--card-color); margin:20px; padding:20px;
-        border-radius:15px; box-shadow:0 5px 15px var(--shadow-color);
-        display:flex; flex-direction:row; width:800px; max-width:95%;
-        align-items:center; transition:0.3s;
-    }
-    .product-card img {width:250px; border-radius:15px; margin-right:30px;}
-    .product-info h3 {font-size:1.5rem; margin-bottom:20px;}
-    .license-options {display:flex; flex-direction:column; margin-bottom:20px;}
-    .license-options button {
-        margin:5px 0; padding:10px; border:none; border-radius:10px;
-        cursor:pointer; background: var(--secondary-color); color:#fff;
-        transition:0.3s;
-    }
-    .license-options button:hover {background: var(--accent-color);}
-    .add-cart {display:flex; gap:20px;}
-    .add-cart button {
-        padding:10px 20px; border:none; border-radius:10px; cursor:pointer;
-        background: var(--accent-color); color:#fff; font-weight:bold;
-        transition:0.3s;
-    }
-    .add-cart button:hover {opacity:0.8;}
+/* Product Info */
+.product-info {flex:1; display:flex; flex-direction:column;}
+.product-info h3 {font-size:2rem; margin-bottom:20px; cursor:pointer; transition:0.3s;}
+.product-info h3:hover {color:var(--accent);}
+.license-options {display:flex; flex-direction:column; margin-bottom:20px;}
+.license-options button {
+  margin:6px 0; padding:12px; border:none; border-radius:12px;
+  cursor:pointer; background: var(--secondary); color:#fff; font-weight:600; transition:0.3s;
+}
+.license-options button:hover {background:var(--accent);}
+.add-cart {display:flex; gap:20px;}
+.add-cart button {
+  padding:12px 25px; border:none; border-radius:12px; cursor:pointer;
+  font-weight:700; background: var(--accent); color:#fff; transition:0.3s;
+}
+.add-cart button:hover {opacity:0.85;}
+input[type=number] {width:70px; padding:8px; border-radius:8px; border:none; background:#333; color:#fff; margin-top:10px;}
 
-    /* Reviews */
-    .review-card {
-        display:flex; align-items:center; background: var(--card-color);
-        padding:20px; margin:20px; border-radius:15px; width:600px; max-width:95%;
-        box-shadow:0 5px 15px var(--shadow-color);
-    }
-    .review-card img {width:60px; height:60px; border-radius:50%; margin-right:15px;}
-    .review-text {display:flex; flex-direction:column;}
-    .review-text h4 {display:flex; align-items:center; gap:10px;}
-    .stars {margin-top:5px;}
+/* Reviews */
+.review-card {
+  display:flex; align-items:center; background: var(--card); padding:20px;
+  border-radius:20px; width:650px; max-width:95%; box-shadow:0 10px 20px var(--shadow); transition:0.3s;
+}
+.review-card:hover {transform:translateY(-5px);}
+.review-card img {width:70px; height:70px; border-radius:50%; margin-right:20px;}
+.review-text {display:flex; flex-direction:column;}
+.review-text h4 {display:flex; align-items:center; gap:12px; font-size:1.2rem;}
+.stars span {font-size:1.3rem; color:#ffd700;}
 
-    .stars span {font-size:1.2rem; color:#ffd700;}
+/* Animations */
+@keyframes fadeIn {100% {opacity:1;}}
 </style>
 </head>
 <body>
@@ -109,77 +109,80 @@
 <div id="loader">Loading...</div>
 
 <header>
-    <h1>Perfect Website</h1>
-    <nav>
-        <a href="#" onclick="openTab('products')">Products</a>
-        <a href="#" onclick="openTab('reviews')">Reviews</a>
-    </nav>
+  <h1>PerfectSite</h1>
+  <nav>
+    <a href="#" class="active" onclick="openTab('products')">Products</a>
+    <a href="#" onclick="openTab('reviews')">Reviews</a>
+  </nav>
 </header>
 
 <section class="hero">
-    <h2>2k+ Customers</h2>
-    <p>Customer Satisfaction: 4.94 ⭐</p>
+  <h2>2k+ Customers</h2>
+  <p>Customer Satisfaction: 4.94 ⭐</p>
 </section>
 
 <div class="tab-container">
-    <button class="active" onclick="openTab('products')">Products</button>
-    <button onclick="openTab('reviews')">Reviews</button>
+  <button class="active" onclick="openTab('products')">Products</button>
+  <button onclick="openTab('reviews')">Reviews</button>
 </div>
 
-<!-- Products Tab -->
+<!-- Products -->
 <div id="products" class="tab-content active">
-    <div class="product-card">
-        <img src="assets/fn.png" alt="Product Image">
-        <div class="product-info">
-            <h3>Browse Products</h3>
-            <div class="license-options">
-                <button>1 DAY LICENSE</button>
-                <button>7 DAY LICENSE</button>
-                <button>30 DAY LICENSE</button>
-                <button>LIFETIME LICENSE</button>
-            </div>
-            <label>Quantity: <input type="number" min="1" value="1"></label>
-            <div class="add-cart">
-                <button>Add To Cart</button>
-                <button>CheckOut</button>
-            </div>
-        </div>
+  <div class="product-card">
+    <img src="assets/fn.png" alt="Product Image">
+    <div class="product-info">
+      <h3 onclick="openProductPanel()">Browse Products</h3>
+      <div class="license-options">
+        <button>1 DAY LICENSE</button>
+        <button>7 DAY LICENSE</button>
+        <button>30 DAY LICENSE</button>
+        <button>LIFETIME LICENSE</button>
+      </div>
+      <label>Quantity: <input type="number" min="1" value="1"></label>
+      <div class="add-cart">
+        <button>Add To Cart</button>
+        <button>CheckOut</button>
+      </div>
     </div>
+  </div>
 </div>
 
-<!-- Reviews Tab -->
+<!-- Reviews -->
 <div id="reviews" class="tab-content">
-    <div class="review-card">
-        <img src="assets/review1.png" alt="Reviewer">
-        <div class="review-text">
-            <h4>Username <img src="assets/tick.png" alt="Verified" width="20"></h4>
-            <div class="stars">⭐⭐⭐⭐⭐</div>
-            <p>Amazing service! Totally satisfied with my purchase.</p>
-        </div>
+  <div class="review-card">
+    <img src="assets/review1.png" alt="Reviewer">
+    <div class="review-text">
+      <h4>Username <img src="assets/tick.png" alt="Verified" width="22"></h4>
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <p>Amazing service! Totally satisfied with my purchase.</p>
     </div>
-    <div class="review-card">
-        <img src="assets/review1.png" alt="Reviewer">
-        <div class="review-text">
-            <h4>AnotherUser <img src="assets/tick.png" alt="Verified" width="20"></h4>
-            <div class="stars">⭐⭐⭐⭐⭐</div>
-            <p>High quality and fast delivery. Highly recommend!</p>
-        </div>
+  </div>
+  <div class="review-card">
+    <img src="assets/review1.png" alt="Reviewer">
+    <div class="review-text">
+      <h4>AnotherUser <img src="assets/tick.png" alt="Verified" width="22"></h4>
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <p>High quality and fast delivery. Highly recommend!</p>
     </div>
+  </div>
 </div>
 
 <script>
-    // Loader hide after 2.5s
-    window.addEventListener('load', () => {
-        setTimeout(()=>document.getElementById('loader').style.display='none', 2500);
-    });
+window.addEventListener('load', () => {
+  setTimeout(()=>document.getElementById('loader').classList.add('hidden'), 2000);
+});
 
-    // Tab switching
-    function openTab(tabName){
-        document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
-        document.getElementById(tabName).classList.add('active');
-        document.querySelectorAll('.tab-container button').forEach(b=>b.classList.remove('active'));
-        event.target.classList.add('active');
-    }
+function openTab(tabName){
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById(tabName).classList.add('active');
+  document.querySelectorAll('.tab-container button').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+function openProductPanel(){
+  alert("This would open the massive product UI panel. You can replace this with a modal.");
+}
 </script>
 
 </body>
