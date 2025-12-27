@@ -5,6 +5,7 @@
 <title>szn tweaks — Extreme Performance</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="assets/logo.png">
+
 <style>
 :root{
   --accent:#3b82f6;
@@ -18,6 +19,7 @@ body{
   background:radial-gradient(circle at top,#020229,transparent 45%),linear-gradient(#020202,#000);
   color:#fff;overflow-x:hidden;
 }
+
 /* LOADER */
 #loader{
   position:fixed;inset:0;background:#000;
@@ -44,24 +46,19 @@ header{
 }
 .logo{display:flex;align-items:center;gap:12px;font-weight:700;}
 .logo img{width:34px;animation:spin 6s linear infinite;}
-nav{position:relative}
 nav a{
   margin:0 16px;color:#aaa;text-decoration:none;
   cursor:pointer;transition:.25s;
 }
 nav a.active,nav a:hover{color:var(--accent);}
-.nav-indicator{
-  position:absolute;bottom:-10px;height:3px;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
-  border-radius:4px;transition:.35s;
-}
 .nav-btn{
   padding:11px 22px;border-radius:14px;
   font-weight:700;background:linear-gradient(90deg,var(--accent),var(--accent2));
   color:#fff;text-decoration:none;
 }
 #adminBtn{
-  margin-left:12px;padding:11px 22px;border-radius:14px;font-weight:700;background:var(--accent2);cursor:pointer;color:#fff;border:none;
+  margin-left:12px;padding:11px 22px;border-radius:14px;
+  font-weight:700;background:#1e40af;border:none;color:#fff;cursor:pointer;
 }
 
 /* SECTIONS */
@@ -69,7 +66,7 @@ section{
   min-height:100vh;
   padding:150px 20px 80px;
   display:none;
-  animation:fadeInUp .7s forwards;
+  animation:fadeInUp .6s forwards;
 }
 section.active{display:block;}
 
@@ -81,28 +78,13 @@ section.active{display:block;}
   border:1px solid rgba(59,130,246,.35);
   border-radius:999px;color:#a5c9ff;
   margin-bottom:28px;font-weight:700;
-  animation:fadeIn .5s ease-in-out;
 }
-.hero h1{font-size:68px;line-height:1.05;animation:slideIn 1s forwards;}
+.hero h1{font-size:68px;line-height:1.05;}
 .hero h1 span{
   background:linear-gradient(90deg,#a5c9ff,var(--accent));
   -webkit-background-clip:text;color:transparent;
 }
-.hero p{max-width:720px;margin:22px auto;font-size:19px;opacity:.9;animation:fadeIn 1s 0.5s forwards;}
-.buttons{margin-top:38px}
-.btn{
-  display:inline-block;padding:15px 32px;border-radius:16px;
-  font-weight:700;text-decoration:none;transition:.25s;
-}
-.btn.primary{
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
-  color:#fff;box-shadow:0 0 35px rgba(59,130,246,.55);
-  animation:popIn .5s forwards;
-}
-.btn.secondary{
-  margin-left:12px;border:1px solid var(--accent);color:#b3d1ff;
-  animation:popIn .5s 0.2s forwards;
-}
+.hero p{max-width:720px;margin:22px auto;font-size:19px;opacity:.9;}
 
 /* CARDS */
 .cards{
@@ -115,26 +97,28 @@ section.active{display:block;}
   padding:30px;background:var(--panel);
   border:1px solid var(--border);
   border-radius:22px;transition:.3s;
-  animation:fadeInUp .6s forwards;
 }
 .card:hover{
-  transform:translateY(-8px) scale(1.02);
+  transform:translateY(-6px);
   box-shadow:0 0 40px rgba(59,130,246,.35);
 }
 
 /* REVIEWS */
 .review{display:flex;gap:16px;align-items:flex-start;}
-.avatar{width:54px;height:54px;border-radius:50%;border:2px solid rgba(255,255,255,.2);object-fit:cover;}
+.avatar{
+  width:56px;height:56px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.2);
+  object-fit:cover;
+}
 .review-name{font-weight:700;display:flex;gap:6px;align-items:center;}
 .verified{width:16px}
 .review-text{opacity:.9;font-size:15px;margin-top:4px;}
 .stars{color:#60a5fa;font-size:14px;margin-top:4px;}
-.review-btns{margin-top:8px;display:flex;gap:8px;}
+.review-btns{margin-top:8px;}
 .review-btns button{
   background:rgba(59,130,246,.25);
   border:none;padding:6px 14px;border-radius:8px;
   color:#fff;cursor:pointer;
-  transition:.3s;
 }
 .review-btns button:hover{background:rgba(59,130,246,.45);}
 
@@ -144,38 +128,78 @@ section.active{display:block;}
   border:1px solid var(--border);
   border-radius:14px;padding:16px;
   cursor:pointer;
-  transition:.3s;
 }
-.faq-item:hover{background:rgba(59,130,246,.1);}
-.faq-answer{display:none;margin-top:8px;color:#b3d1ff;font-size:15px;}
+.faq-answer{display:none;margin-top:8px;color:#b3d1ff;}
 
-/* ADMIN MODAL */
+/* ADMIN PANEL */
 #adminModal{
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;
-  z-index:9999;overflow-y:auto;
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.9);
+  display:none;
+  align-items:center;justify-content:center;
+  z-index:9999;
 }
 #adminContent{
-  background:var(--panel);border:1px solid var(--border);
-  padding:30px;border-radius:22px;width:90%;max-width:900px;color:#fff;
-  display:flex;flex-direction:column;gap:16px;
+  width:95%;max-width:1000px;
+  background:#020617;
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:28px;
+  max-height:90vh;
+  overflow-y:auto;
 }
-.reviewAdmin{display:flex;gap:16px;align-items:flex-start;border:1px solid var(--accent);padding:16px;border-radius:16px;flex-wrap:wrap;}
-.reviewAdmin input, .reviewAdmin textarea, .reviewAdmin select{margin-top:4px;width:100%;border-radius:8px;padding:6px;border:none;}
-.reviewAdmin button{background:var(--accent2);border:none;color:#fff;padding:6px 12px;border-radius:8px;cursor:pointer;margin-left:6px;}
-.admin-close{background:#1e40af;padding:10px 20px;border-radius:12px;cursor:pointer;border:none;align-self:flex-end;}
+.admin-title{
+  font-size:26px;font-weight:800;
+  margin-bottom:18px;color:#93c5fd;
+}
+.reviewAdmin{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:18px;
+  display:grid;
+  grid-template-columns:70px 1fr;
+  gap:16px;
+  margin-bottom:16px;
+}
+.reviewAdmin img{
+  width:64px;height:64px;border-radius:50%;
+  object-fit:cover;
+}
+.reviewAdmin label{font-size:13px;opacity:.7;}
+.reviewAdmin input,
+.reviewAdmin textarea{
+  width:100%;
+  padding:8px 10px;
+  border-radius:10px;
+  border:none;
+  background:#020617;
+  color:#fff;
+}
+.reviewAdmin textarea{resize:vertical;min-height:60px;}
+.admin-actions{display:flex;gap:10px;margin-top:8px;}
+.admin-actions button{
+  background:var(--accent2);
+  border:none;padding:8px 14px;
+  border-radius:10px;color:#fff;cursor:pointer;
+}
+.admin-actions .danger{background:#dc2626;}
+.admin-close{
+  margin-top:20px;
+  background:#1e40af;
+  border:none;padding:12px 22px;
+  border-radius:14px;color:#fff;cursor:pointer;
+}
 
 /* ANIMATIONS */
-@keyframes fadeInUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(25px)}to{opacity:1}}
 @keyframes fadeOut{to{opacity:0;visibility:hidden}}
-@keyframes pulse{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.15);opacity:1}}
+@keyframes pulse{50%{transform:scale(1.15)}}
 @keyframes load{to{width:100%}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes popIn{0%{transform:scale(0)}100%{transform:scale(1)}}
-@keyframes slideIn{0%{transform:translateY(50px);opacity:0}100%{transform:translateY(0);opacity:1}}
-@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
+
 <body>
 
 <div id="loader"><img src="assets/logo.png"><div class="bar"><span></span></div></div>
@@ -189,7 +213,6 @@ section.active{display:block;}
 <a data-tab="reviews">Reviews</a>
 <a data-tab="about">About</a>
 <a data-tab="faq">FAQ</a>
-<span class="nav-indicator"></span>
 </nav>
 <a class="nav-btn" href="assets/downloads/szntweaks.exe" download>Download</a>
 <button id="adminBtn">Admin</button>
@@ -197,38 +220,48 @@ section.active{display:block;}
 </header>
 
 <section id="home" class="active">
-<div class="hero"><span class="badge">⚡ Extreme Windows Optimization</span>
+<div class="hero">
+<span class="badge">⚡ Extreme Windows Optimization</span>
 <h1>Unleash<br><span>Maximum Performance</span></h1>
-<p>Boost FPS, reduce latency and unlock your PC’s full potential.</p></div>
+<p>Boost FPS, reduce latency and unlock your PC’s full potential.</p>
+</div>
 </section>
 
 <section id="features">
-<div class="hero"><span class="badge">🚀 Features</span><h1>Built for<br><span>Pure FPS</span></h1>
+<div class="hero">
+<span class="badge">🚀 Features</span>
+<h1>Built for<br><span>Pure FPS</span></h1>
 <div class="cards">
-<div class="card"><h3>Advanced FPS Boosting</h3><p>Higher FPS & smoother gameplay.</p></div>
-<div class="card"><h3>Latency Fix</h3><p>Lower input delay and ping.</p></div>
-<div class="card"><h3>Windows Debloat</h3><p>Frees RAM & CPU instantly.</p></div>
-<div class="card"><h3>Network Optimization</h3><p>Stable & faster connections.</p></div>
+<div class="card"><h3>FPS Boost</h3><p>Massive FPS gains.</p></div>
+<div class="card"><h3>Latency Fix</h3><p>Lower input delay.</p></div>
+<div class="card"><h3>Debloat</h3><p>Less background tasks.</p></div>
+<div class="card"><h3>Network</h3><p>Stable connection.</p></div>
 </div>
 </div>
 </section>
 
 <section id="reviews">
-<div class="hero"><span class="badge">⭐ Reviews (<span id="reviewCount">0</span>)</span>
-<h1>Trusted by<br><span>Streamers / Pros</span></h1>
-<div class="cards" id="reviewsContainer"></div></div>
+<div class="hero">
+<span class="badge">⭐ Reviews (<span id="reviewCount">0</span>)</span>
+<h1>Trusted by<br><span>Players</span></h1>
+<div class="cards" id="reviewsContainer"></div>
+</div>
 </section>
 
 <section id="about">
-<div class="hero"><span class="badge">ℹ About</span><h1>Why Choose<br><span>szn tweaks</span></h1>
-<p>Safe, tested, and built for competitive players.</p></div>
+<div class="hero">
+<span class="badge">ℹ About</span>
+<h1>Why Choose<br><span>szn tweaks</span></h1>
+<p>Safe. Fast. Competitive.</p>
+</div>
 </section>
 
 <section id="faq">
-<div class="hero"><span class="badge">❓ FAQ</span><h1>Frequently Asked<br><span>Questions</span></h1>
-<div class="faq-item">Is it safe?<div class="faq-answer">Yes, fully tested.</div></div>
-<div class="faq-item">Windows support?<div class="faq-answer">Windows 10 & 11</div></div>
-<div class="faq-item">Is it free?<div class="faq-answer">Yes.</div></div>
+<div class="hero">
+<span class="badge">❓ FAQ</span>
+<h1>Questions</h1>
+<div class="faq-item">Is it safe?<div class="faq-answer">Yes.</div></div>
+<div class="faq-item">Windows?<div class="faq-answer">10 & 11.</div></div>
 </div>
 </section>
 
@@ -236,99 +269,79 @@ section.active{display:block;}
 
 <script>
 let reviewsData=JSON.parse(localStorage.getItem("reviewsData"))||[
-  {name:"freeze",avatar:"assets/review1.png",text:"Best tweaking tool I’ve ever used. Massive FPS boost.",stars:5,verified:true},
-  {name:"max",avatar:"assets/review4.png",text:"No glaze but went from 240 FPS to 360.",stars:5,verified:true},
-  {name:"jay",avatar:"assets/review2.png",text:"Went from 200 processes to 65 instantly.",stars:5,verified:true},
-  {name:"manman",avatar:"assets/review3.png",text:"Zero input delay now. Fortnite feels insanely smooth.",stars:5,verified:true}
+{name:"freeze",avatar:"assets/review1.png",text:"Massive FPS boost.",stars:5,verified:true},
+{name:"max",avatar:"assets/review4.png",text:"240 → 360 FPS.",stars:5,verified:true}
 ];
 
-function saveReviews(){localStorage.setItem("reviewsData",JSON.stringify(reviewsData)); renderReviews();}
+function saveReviews(){localStorage.setItem("reviewsData",JSON.stringify(reviewsData));renderReviews();}
 function renderReviews(){
-  const rc=document.getElementById("reviewsContainer");
-  rc.innerHTML="";
-  document.getElementById("reviewCount").innerText=reviewsData.length;
-  reviewsData.forEach((r,i)=>{
-    rc.innerHTML+=`<div class="card review">
-      <img src="${r.avatar}" class="avatar">
-      <div>
-        <div class="review-name">${r.name}${r.verified?` <img src="assets/tick.png" class="verified">`:""}</div>
-        <div class="stars">${"⭐".repeat(r.stars)}</div>
-        <div class="review-text">${r.text}</div>
-        <div class="review-btns"><button onclick="likeReview(${i})">Like (${r.likes||0})</button></div>
-      </div>
-    </div>`;
-  });
+const rc=document.getElementById("reviewsContainer");
+rc.innerHTML="";
+reviewCount.innerText=reviewsData.length;
+reviewsData.forEach((r,i)=>{
+rc.innerHTML+=`
+<div class="card review">
+<img src="${r.avatar}" class="avatar">
+<div>
+<div class="review-name">${r.name}${r.verified?` <img src="assets/tick.png" class="verified">`:""}</div>
+<div class="stars">${"⭐".repeat(r.stars)}</div>
+<div class="review-text">${r.text}</div>
+<div class="review-btns"><button onclick="likeReview(${i})">Like (${r.likes||0})</button></div>
+</div></div>`});
 }
-function likeReview(i){reviewsData[i].likes=reviewsData[i].likes?reviewsData[i].likes+1:1;saveReviews();}
-
-// INIT
+function likeReview(i){reviewsData[i].likes=(reviewsData[i].likes||0)+1;saveReviews();}
 renderReviews();
 
-/* TAB SYSTEM */
-const tabs=[...document.querySelectorAll("[data-tab]")];
-const sections=[...document.querySelectorAll("section")];
-tabs.forEach(t=>t.onclick=()=>{
-  sections.forEach(s=>s.classList.remove("active"));
-  document.getElementById(t.dataset.tab).classList.add("active");
-  tabs.forEach(a=>a.classList.remove("active"));
-  t.classList.add("active");
-});
+/* Tabs */
+document.querySelectorAll("[data-tab]").forEach(t=>{
+t.onclick=()=>{
+document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+document.getElementById(t.dataset.tab).classList.add("active");
+document.querySelectorAll("[data-tab]").forEach(a=>a.classList.remove("active"));
+t.classList.add("active");};});
 
-/* FAQ TOGGLE */
+/* FAQ */
 document.querySelectorAll(".faq-item").forEach(f=>{
-  f.onclick=()=>{const a=f.querySelector(".faq-answer"); a.style.display=a.style.display==="block"?"none":"block";}
+f.onclick=()=>{const a=f.querySelector(".faq-answer");a.style.display=a.style.display==="block"?"none":"block";}
 });
 
-/* ADMIN PANEL */
-const adminBtn=document.getElementById("adminBtn");
-const adminModal=document.getElementById("adminModal");
-const adminContent=document.getElementById("adminContent");
+/* ADMIN */
 adminBtn.onclick=()=>{
-  const pw=prompt("Enter admin password:");
-  if(pw!=="300") return alert("Wrong password");
-  showAdminPanel();
+if(prompt("Admin password")!=="300")return;
+adminModal.style.display="flex";
+adminContent.innerHTML=`<div class="admin-title">Review Manager</div>`;
+reviewsData.forEach((r,i)=>{
+adminContent.innerHTML+=`
+<div class="reviewAdmin">
+<img src="${r.avatar}">
+<div>
+<label>Name</label><input id="n${i}" value="${r.name}">
+<label>Review</label><textarea id="t${i}">${r.text}</textarea>
+<label>Stars</label><input type="number" min="1" max="5" id="s${i}" value="${r.stars}">
+<label><input type="checkbox" id="v${i}" ${r.verified?"checked":""}> Verified</label>
+<input type="file" accept=".png,.gif" id="f${i}">
+<div class="admin-actions">
+<button onclick="saveEdit(${i})">Save</button>
+<button class="danger" onclick="removeReview(${i})">Delete</button>
+</div></div></div>`});
+adminContent.innerHTML+=`<button class="admin-close" onclick="adminModal.style.display='none'">Close</button>`;
 };
-function showAdminPanel(){
-  adminModal.style.display="flex";
-  adminContent.innerHTML="";
-  reviewsData.forEach((r,i)=>{
-    const div=document.createElement("div");
-    div.className="reviewAdmin";
-    div.innerHTML=`
-      <img src="${r.avatar}" class="avatar">
-      <input type="text" placeholder="Name" value="${r.name}" id="name${i}">
-      <textarea placeholder="Review text" id="text${i}">${r.text}</textarea>
-      <input type="number" min="1" max="5" value="${r.stars}" id="stars${i}">
-      <label>Verified <input type="checkbox" ${r.verified?"checked":""} id="ver${i}"></label>
-      <input type="file" accept=".png,.gif" id="img${i}">
-      <button onclick="saveEdit(${i})">Save</button>
-      <button onclick="removeReview(${i})">Remove</button>
-    `;
-    adminContent.appendChild(div);
-  });
-  const closeBtn=document.createElement("button");
-  closeBtn.innerText="Close Admin";
-  closeBtn.className="admin-close";
-  closeBtn.onclick=()=>{adminModal.style.display="none";}
-  adminContent.appendChild(closeBtn);
-}
-function saveEdit(i){
-  const name=document.getElementById(`name${i}`).value;
-  const text=document.getElementById(`text${i}`).value;
-  const stars=parseInt(document.getElementById(`stars${i}`).value);
-  const verified=document.getElementById(`ver${i}`).checked;
-  const fileInput=document.getElementById(`img${i}`);
-  if(fileInput.files[0]){
-    const reader=new FileReader();
-    reader.onload=function(e){reviewsData[i].avatar=e.target.result;updateReview(i,name,text,stars,verified);}
-    reader.readAsDataURL(fileInput.files[0]);
-  }else{updateReview(i,name,text,stars,verified);}
-}
-function updateReview(i,name,text,stars,verified){reviewsData[i]={...reviewsData[i],name,text,stars,verified};saveReviews();}
-function removeReview(i){reviewsData.splice(i,1);saveReviews(); showAdminPanel();}
 
-/* LOADER HIDE */
-window.addEventListener("load",()=>{setTimeout(()=>document.getElementById("loader").style.display="none",2500);});
+function saveEdit(i){
+const f=document.getElementById(`f${i}`);
+const apply=()=>{
+reviewsData[i]={...reviewsData[i],
+name:n${i}.value,text:t${i}.value,stars:+s${i}.value,verified:v${i}.checked};
+saveReviews();};
+if(f.files[0]){
+const r=new FileReader();
+r.onload=e=>{reviewsData[i].avatar=e.target.result;apply();};
+r.readAsDataURL(f.files[0]);
+}else apply();
+}
+function removeReview(i){reviewsData.splice(i,1);saveReviews();adminModal.style.display="none";}
+window.onload=()=>setTimeout(()=>loader.style.display="none",2500);
 </script>
+
 </body>
 </html>
