@@ -2,470 +2,338 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>szn tweaks — Extreme Performance</title>
+<title>SZN Tweaks — Extreme Performance</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="assets/logo.png">
-
 <style>
 :root{
---accent:#6cf2ff;
---accent2:#7b7bff;
---bg:#05070f;
---panel:rgba(255,255,255,.08);
---border:rgba(255,255,255,.18);
---radius:26px;
+  --accent:#6cf2ff;
+  --accent2:#7b7bff;
+  --bg:#05070f;
+  --panel:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.18);
+  --radius:24px;
+  --like-color:#ff6b81;
+  --transition:.35s;
 }
-
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Segoe UI,system-ui,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Segoe UI,sans-serif;scroll-behavior:smooth;}
 body{
-background:
-radial-gradient(circle at 15% 10%,#0b1a3a,transparent 45%),
-radial-gradient(circle at 85% 90%,#160b3a,transparent 45%),
-linear-gradient(#05070f,#000);
-color:#fff;
-overflow-x:hidden;
+  background: radial-gradient(circle at 15% 10%,#0b1a3a,transparent 45%),
+              radial-gradient(circle at 85% 90%,#160b3a,transparent 45%),
+              linear-gradient(#05070f,#000);
+  color:#fff;
+  overflow-x:hidden;
 }
 
-/* CURSOR GLOW */
+/* CURSOR */
 .cursor{
-position:fixed;
-width:260px;height:260px;
-border-radius:50%;
-background:radial-gradient(circle,var(--accent),transparent 60%);
-pointer-events:none;
-opacity:.18;
-transform:translate(-50%,-50%);
-z-index:0;
-}
-
-/* LOADER */
-#loader{
-position:fixed;inset:0;
-background:#000;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-z-index:9999;
-animation:fadeOut .8s forwards;
-animation-delay:2.4s;
-}
-#loader img{
-width:90px;
-filter:drop-shadow(0 0 40px var(--accent));
-animation:float 2s ease-in-out infinite;
-}
-#loader span{
-margin-top:24px;
-width:70px;height:70px;
-border-radius:50%;
-border:4px solid rgba(255,255,255,.1);
-border-top-color:var(--accent);
-animation:spin 1s linear infinite;
+  position:fixed;width:260px;height:260px;
+  border-radius:50%;
+  background:radial-gradient(circle,var(--accent),transparent 60%);
+  pointer-events:none;opacity:.18;
+  transform:translate(-50%,-50%);z-index:9999;
+  transition:transform .1s ease;
 }
 
 /* NAV */
 header{
-position:fixed;top:0;width:100%;
-z-index:100;
-background:rgba(5,7,15,.7);
-backdrop-filter:blur(18px);
-border-bottom:1px solid var(--border);
+  position:fixed;top:0;width:100%;
+  z-index:100;
+  background:rgba(5,7,15,.7);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
 }
 .nav{
-max-width:1300px;
-margin:auto;
-padding:18px 26px;
-display:flex;
-align-items:center;
-justify-content:space-between;
+  max-width:1300px;
+  margin:auto;
+  padding:18px 26px;
+  display:flex;align-items:center;justify-content:space-between;
 }
-.logo{display:flex;align-items:center;gap:12px;font-weight:800}
-.logo img{width:36px}
+.logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:24px;}
+.logo img{width:36px;}
 nav{position:relative;display:flex;align-items:center}
 nav a{
-margin:0 18px;
-color:#aab1ff;
-cursor:pointer;
-text-decoration:none;
-font-weight:600;
-transition:.25s;
+  margin:0 18px;color:#aab1ff;cursor:pointer;
+  text-decoration:none;font-weight:600;transition:var(--transition);
+  position:relative;
 }
-nav a.active,nav a:hover{color:#fff}
+nav a.active, nav a:hover{color:#fff;}
 .nav-indicator{
-position:absolute;
-bottom:-14px;
-height:4px;
-background:linear-gradient(90deg,var(--accent),var(--accent2));
-border-radius:999px;
-transition:.35s;
+  position:absolute;bottom:-14px;height:4px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  border-radius:999px;transition:var(--transition);
 }
 .nav-btn{
-padding:12px 26px;
-border-radius:999px;
-font-weight:800;
-background:linear-gradient(135deg,var(--accent),var(--accent2));
-color:#000;
-text-decoration:none;
+  padding:12px 26px;border-radius:999px;
+  font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#000;text-decoration:none;transition:var(--transition);
 }
+.nav-btn:hover{transform:scale(1.05);}
 #adminBtn{
-margin-left:12px;
-padding:12px 22px;
-border-radius:999px;
-border:1px solid var(--border);
-background:transparent;
-color:#fff;
-cursor:pointer;
+  margin-left:12px;padding:12px 22px;border-radius:999px;
+  border:1px solid var(--border);background:transparent;color:#fff;cursor:pointer;
+  transition:var(--transition);
 }
+#adminBtn:hover{transform:scale(1.05);}
 
 /* SECTIONS */
 section{
-min-height:100vh;
-padding:160px 22px 90px;
-display:none;
+  min-height:100vh;padding:160px 22px 90px;
+  opacity:0;transform:translateY(40px);transition:opacity .6s ease, transform .6s ease;
+  display:none;
 }
-section.active{
-display:block;
-animation:sectionIn .6s ease forwards;
-}
+section.active{display:block;opacity:1;transform:translateY(0);}
 
 /* HERO */
-.hero{max-width:1200px;margin:auto;text-align:center}
+.hero{max-width:1200px;margin:auto;text-align:center;position:relative;z-index:1;}
 .badge{
-display:inline-block;
-padding:10px 28px;
-border-radius:999px;
-background:rgba(108,242,255,.18);
-border:1px solid rgba(108,242,255,.4);
-font-weight:800;
-margin-bottom:30px;
+  display:inline-block;padding:10px 28px;
+  border-radius:999px;background:rgba(108,242,255,.18);
+  border:1px solid rgba(108,242,255,.4);
+  font-weight:800;margin-bottom:30px;
+  text-transform:uppercase;letter-spacing:1px;
 }
-.hero h1{font-size:72px;line-height:1.05}
+.hero h1{font-size:64px;line-height:1.05;}
 .hero h1 span{
-background:linear-gradient(90deg,#fff,var(--accent));
--webkit-background-clip:text;
-color:transparent;
+  background:linear-gradient(90deg,#fff,var(--accent));
+  -webkit-background-clip:text;color:transparent;
 }
-.hero p{max-width:760px;margin:22px auto;font-size:20px;opacity:.9}
+.hero p{max-width:760px;margin:22px auto;font-size:20px;opacity:.9;}
 
 /* STATS */
-.stats{
-margin-top:80px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:28px;
-}
+.stats{margin-top:80px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;}
 .stat{
-background:var(--panel);
-border:1px solid var(--border);
-border-radius:var(--radius);
-padding:34px 26px;
-transition:.4s;
+  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);
+  padding:34px 26px;text-align:center;transition:transform .4s, box-shadow .4s;
 }
-.stat:hover{transform:translateY(-10px);box-shadow:0 30px 80px rgba(108,242,255,.35)}
-.stat h2{font-size:42px;font-weight:900;color:var(--accent)}
-.stat p{opacity:.85;font-weight:600}
+.stat:hover{transform:translateY(-10px);box-shadow:0 30px 80px rgba(108,242,255,.35);}
+.stat h2{font-size:42px;font-weight:900;color:var(--accent);}
+.stat p{opacity:.85;font-weight:600;}
 
 /* CARDS */
 .cards{
-margin-top:90px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:28px;
+  margin-top:90px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:28px;
 }
 .card{
-background:var(--panel);
-border:1px solid var(--border);
-border-radius:var(--radius);
-padding:32px;
-transition:.4s;
+  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);
+  padding:32px;transition:transform .4s, box-shadow .4s;position:relative;
 }
-.card:hover{
-transform:translateY(-10px);
-box-shadow:0 30px 80px rgba(123,123,255,.35);
+.card:hover{transform:translateY(-10px);box-shadow:0 30px 80px rgba(123,123,255,.35);}
+.card .like-btn{
+  position:absolute;top:14px;right:14px;cursor:pointer;font-size:20px;
+  transition:transform .2s;user-select:none;
 }
+.card .like-btn:hover{transform:scale(1.3);color:var(--like-color);}
 
-/* REVIEWS (RESTORED LAYOUT) */
-.review{
-display:flex;
-gap:16px;
-align-items:flex-start;
-}
-.avatar{
-width:54px;height:54px;
-border-radius:50%;
-border:2px solid rgba(255,255,255,.3);
-object-fit:cover;
-}
-.review-name{
-font-weight:800;
-display:flex;
-align-items:center;
-gap:6px;
-}
-.verified{width:16px}
-.review-text{margin-top:6px;opacity:.9}
-.stars{margin-top:6px;color:#ffd86b}
-.review-img{
-margin-top:12px;
-width:100%;
-border-radius:14px;
-border:1px solid var(--border);
-}
+/* REVIEWS */
+.review{display:flex;gap:16px;align-items:flex-start;}
+.avatar{width:54px;height:54px;border-radius:50%;border:2px solid rgba(255,255,255,.3);object-fit:cover;}
+.review-name{font-weight:800;display:flex;align-items:center;gap:6px;}
+.verified{width:16px;}
+.review-text{margin-top:6px;opacity:.9;}
+.stars{margin-top:6px;color:#ffd86b;}
+.review-img{margin-top:12px;width:100%;border-radius:14px;border:1px solid var(--border);}
 
 /* PRODUCTS */
-.product-img{
-width:100%;
-border-radius:16px;
-border:1px solid var(--border);
-}
-.price{
-margin-top:10px;
-font-size:20px;
-font-weight:900;
-color:#9effff;
-}
+.product-img{width:100%;border-radius:16px;border:1px solid var(--border);}
+.price{margin-top:10px;font-size:20px;font-weight:900;color:#9effff;}
 
 /* FAQ */
-.faq-item{
-background:var(--panel);
-border:1px solid var(--border);
-border-radius:18px;
-padding:18px;
-margin:16px 0;
-cursor:pointer;
-}
-.faq-answer{display:none;margin-top:8px;opacity:.85}
+.faq-item{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:18px;margin:16px 0;cursor:pointer;transition:var(--transition);}
+.faq-item:hover{transform:translateX(5px);}
+.faq-answer{display:none;margin-top:8px;opacity:.85;}
 
 /* ADMIN */
-#adminModal{
-position:fixed;inset:0;
-background:rgba(0,0,0,.85);
-display:none;
-align-items:center;
-justify-content:center;
-z-index:9999;
-}
+#adminModal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:9999;}
 #adminContent{
-background:var(--panel);
-border:1px solid var(--border);
-border-radius:var(--radius);
-padding:32px;
-width:90%;
-max-width:900px;
-display:flex;
-flex-direction:column;
-gap:14px;
+  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);
+  padding:32px;width:90%;max-width:900px;display:flex;flex-direction:column;gap:14px;
 }
+#adminContent input,#adminContent textarea{padding:12px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.05);color:#fff;resize:none;}
+#adminContent button{padding:12px 18px;border-radius:12px;border:none;background:var(--accent);color:#000;font-weight:800;cursor:pointer;transition:var(--transition);}
+#adminContent button:hover{transform:scale(1.05);}
 
 /* ANIMATIONS */
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes float{50%{transform:translateY(-12px)}}
 @keyframes fadeOut{to{opacity:0;visibility:hidden}}
-@keyframes sectionIn{from{opacity:0;transform:translateY(30px)}to{opacity:1}}
 </style>
 </head>
 
 <body>
-
 <div class="cursor"></div>
 
-<div id="loader">
-<img src="assets/logo.png">
-<span></span>
-</div>
-
 <header>
-<div class="nav">
-<div class="logo"><img src="assets/logo.png"> szn tweaks</div>
-<nav>
-<a data-tab="home" class="active">Home</a>
-<a data-tab="features">Features</a>
-<a data-tab="reviews">Reviews</a>
-<a data-tab="products">Products</a>
-<a data-tab="faq">FAQ</a>
-<span class="nav-indicator"></span>
-</nav>
-<a class="nav-btn" href="assets/downloads/szntweaks.exe" download>Download</a>
-<button id="adminBtn">Admin</button>
-</div>
+  <div class="nav">
+    <div class="logo"><img src="assets/logo.png"> SZN Tweaks</div>
+    <nav>
+      <a data-tab="home" class="active">Home</a>
+      <a data-tab="features">Features</a>
+      <a data-tab="reviews">Reviews</a>
+      <a data-tab="products">Products</a>
+      <a data-tab="faq">FAQ</a>
+      <span class="nav-indicator"></span>
+    </nav>
+    <a class="nav-btn" href="assets/downloads/szntweaks.exe" download>Download</a>
+    <button id="adminBtn">Admin</button>
+  </div>
 </header>
 
 <section id="home" class="active">
-<div class="hero">
-<span class="badge">⚡ Extreme Windows Optimization</span>
-<h1>Push Your PC<br><span>Beyond Limits</span></h1>
-<p>Maximum FPS. Lowest latency. Trusted by thousands.</p>
-
-<div class="stats">
-<div class="stat"><h2 data-count="2500">0</h2><p>Fortnites Optimized</p></div>
-<div class="stat"><h2 data-count="15000">0</h2><p>Active Users</p></div>
-<div class="stat"><h2 data-count="50000">0</h2><p>Customer Reviews</p></div>
-<div class="stat"><h2 data-count="4.9">0</h2><p>User Rating</p></div>
-</div>
-</div>
+  <div class="hero">
+    <span class="badge">⚡ Extreme Windows Optimization</span>
+    <h1>Push Your PC<br><span>Beyond Limits</span></h1>
+    <p>Maximum FPS. Lowest latency. Trusted by thousands.</p>
+    <div class="stats">
+      <div class="stat"><h2 data-count="2500">0</h2><p>Fortnites Optimized</p></div>
+      <div class="stat"><h2 data-count="15000">0</h2><p>Active Users</p></div>
+      <div class="stat"><h2 data-count="50000">0</h2><p>Customer Reviews</p></div>
+      <div class="stat"><h2 data-count="4.9">0</h2><p>User Rating</p></div>
+    </div>
+  </div>
 </section>
 
 <section id="features">
-<div class="hero">
-<span class="badge">🚀 Features</span>
-<h1>Pure<br><span>Performance</span></h1>
-<div class="cards">
-<div class="card">Advanced FPS Boosting</div>
-<div class="card">Latency Reduction</div>
-<div class="card">Windows Debloat</div>
-<div class="card">Network Optimization</div>
-</div>
-</div>
+  <div class="hero">
+    <span class="badge">🚀 Features</span>
+    <h1>Pure<br><span>Performance</span></h1>
+    <div class="cards">
+      <div class="card">Advanced FPS Boosting</div>
+      <div class="card">Latency Reduction</div>
+      <div class="card">Windows Debloat</div>
+      <div class="card">Network Optimization</div>
+    </div>
+  </div>
 </section>
 
 <section id="reviews">
-<div class="hero">
-<span class="badge">⭐ Reviews</span>
-<h1>Trusted by<br><span>Players</span></h1>
-<div class="cards" id="reviewsContainer"></div>
-</div>
+  <div class="hero">
+    <span class="badge">⭐ Reviews</span>
+    <h1>Trusted by<br><span>Players</span></h1>
+    <div class="cards" id="reviewsContainer"></div>
+  </div>
 </section>
 
 <section id="products">
-<div class="hero">
-<span class="badge">🛒 Products</span>
-<h1>Choose Your<br><span>Package</span></h1>
-<div class="cards" id="productsContainer"></div>
-</div>
+  <div class="hero">
+    <span class="badge">🛒 Products</span>
+    <h1>Choose Your<br><span>Package</span></h1>
+    <div class="cards" id="productsContainer"></div>
+  </div>
 </section>
 
 <section id="faq">
-<div class="hero">
-<span class="badge">❓ FAQ</span>
-<h1>Need Help?</h1>
-<div class="faq-item">Is it safe?<div class="faq-answer">Yes, fully safe.</div></div>
-<div class="faq-item">Windows support?<div class="faq-answer">Windows 10 & 11.</div></div>
-</div>
+  <div class="hero">
+    <span class="badge">❓ FAQ</span>
+    <h1>Need Help?</h1>
+    <div class="faq-item">Is it safe?<div class="faq-answer">Yes, fully safe.</div></div>
+    <div class="faq-item">Windows support?<div class="faq-answer">Windows 10 & 11.</div></div>
+  </div>
 </section>
 
 <div id="adminModal"><div id="adminContent"></div></div>
 
 <script>
-/* CURSOR */
 const cursor=document.querySelector(".cursor");
-document.addEventListener("mousemove",e=>{
-cursor.style.left=e.clientX+"px";
-cursor.style.top=e.clientY+"px";
-});
+document.addEventListener("mousemove",e=>{cursor.style.left=e.clientX+"px";cursor.style.top=e.clientY+"px";});
 
 /* COUNTERS */
 document.querySelectorAll("[data-count]").forEach(el=>{
-let end=parseFloat(el.dataset.count);
-let cur=0;
-let step=end/80;
-let int=setInterval(()=>{
-cur+=step;
-if(cur>=end){el.innerText=end;clearInterval(int)}
-else el.innerText=end%1?cur.toFixed(1):Math.floor(cur);
-},20);
+  let end=parseFloat(el.dataset.count);let cur=0;let step=end/80;
+  let int=setInterval(()=>{cur+=step;if(cur>=end){el.innerText=end;clearInterval(int)}else el.innerText=end%1?cur.toFixed(1):Math.floor(cur);},20);
 });
 
 /* REVIEWS DATA */
 let reviewsData=JSON.parse(localStorage.getItem("reviewsData"))||[
-{name:"freeze",avatar:"assets/review1.gif",text:"Massive FPS boost.",stars:5,verified:true,image:"assets/review_img1.gif"},
-{name:"xeno",avatar:"assets/review2.gif",text:"PC feels brand new.",stars:5,verified:true,image:"assets/review_img2.gif"},
-{name:"lucas",avatar:"assets/review3.gif",text:"Worth every penny.",stars:5,verified:true,image:"assets/review_img3.gif"}
+  {name:"freeze",avatar:"assets/review1.gif",text:"Massive FPS boost.",stars:5,verified:true,image:"assets/review_img1.gif",likes:0},
+  {name:"xeno",avatar:"assets/review2.gif",text:"PC feels brand new.",stars:5,verified:true,image:"assets/review_img2.gif",likes:0},
+  {name:"lucas",avatar:"assets/review3.gif",text:"Worth every penny.",stars:5,verified:true,image:"assets/review_img3.gif",likes:0}
 ];
 
 function renderReviews(){
-const rc=document.getElementById("reviewsContainer");
-rc.innerHTML="";
-reviewsData.forEach(r=>{
-rc.innerHTML+=`
-<div class="card review">
-<img src="${r.avatar}" class="avatar">
-<div>
-<div class="review-name">${r.name}${r.verified?'<img src="assets/tick.png" class="verified">':''}</div>
-<div class="stars">${"⭐".repeat(r.stars)}</div>
-<div class="review-text">${r.text}</div>
-${r.image?`<img src="${r.image}" class="review-img">`:``}
-</div>
-</div>`;
-});
+  const rc=document.getElementById("reviewsContainer"); rc.innerHTML="";
+  reviewsData.forEach((r,i)=>{
+    rc.innerHTML+=`
+      <div class="card review">
+        <img src="${r.avatar}" class="avatar">
+        <div>
+          <div class="review-name">${r.name}${r.verified?'<img src="assets/tick.png" class="verified">':''}</div>
+          <div class="stars">${"⭐".repeat(r.stars)}</div>
+          <div class="review-text">${r.text}</div>
+          ${r.image?`<img src="${r.image}" class="review-img">`:``}
+          <div class="like-btn" onclick="likeReview(${i})">❤️ ${r.likes}</div>
+        </div>
+      </div>`;
+  });
+}
+function likeReview(index){
+  reviewsData[index].likes++; localStorage.setItem("reviewsData",JSON.stringify(reviewsData));
+  renderReviews();
 }
 renderReviews();
 
 /* PRODUCTS */
 const products=[
-{name:"SZN Tweaks Free",price:"£0",image:"assets/product1.png"},
-{name:"SZN Tweaks Pro",price:"£9.99",image:"assets/product2.png"},
-{name:"SZN Tweaks Ultimate",price:"£19.99",image:"assets/product3.png"}
+{name:"SZN Tweaks Free",price:"£0",image:"assets/product1.png",likes:0},
+{name:"SZN Tweaks Pro",price:"£9.99",image:"assets/product2.png",likes:0},
+{name:"SZN Tweaks Ultimate",price:"£19.99",image:"assets/product3.png",likes:0}
 ];
-const pc=document.getElementById("productsContainer");
-products.forEach(p=>{
-pc.innerHTML+=`
-<div class="card">
-<img src="${p.image}" class="product-img">
-<h3 style="margin-top:14px">${p.name}</h3>
-<div class="price">${p.price}</div>
-</div>`;
-});
+function renderProducts(){
+  const pc=document.getElementById("productsContainer"); pc.innerHTML="";
+  products.forEach((p,i)=>{
+    pc.innerHTML+=`
+      <div class="card">
+        <img src="${p.image}" class="product-img">
+        <h3 style="margin-top:14px">${p.name}</h3>
+        <div class="price">${p.price}</div>
+        <div class="like-btn" onclick="likeProduct(${i})">❤️ ${p.likes}</div>
+      </div>`;
+  });
+}
+function likeProduct(index){products[index].likes++; renderProducts();}
+renderProducts();
 
 /* TABS */
 const tabs=document.querySelectorAll("[data-tab]");
 const sections=document.querySelectorAll("section");
 const indicator=document.querySelector(".nav-indicator");
-
-function moveIndicator(el){
-indicator.style.width=el.offsetWidth+"px";
-indicator.style.left=el.offsetLeft+"px";
-}
-
-tabs.forEach(t=>{
-t.onclick=()=>{
-sections.forEach(s=>s.classList.remove("active"));
-document.getElementById(t.dataset.tab).classList.add("active");
-tabs.forEach(a=>a.classList.remove("active"));
-t.classList.add("active");
-moveIndicator(t);
-};
-});
+function moveIndicator(el){indicator.style.width=el.offsetWidth+"px";indicator.style.left=el.offsetLeft+"px";}
+tabs.forEach(t=>{t.onclick=()=>{sections.forEach(s=>s.classList.remove("active"));document.getElementById(t.dataset.tab).classList.add("active");tabs.forEach(a=>a.classList.remove("active"));t.classList.add("active");moveIndicator(t);};});
 moveIndicator(document.querySelector("nav a.active"));
 
 /* FAQ */
-document.querySelectorAll(".faq-item").forEach(f=>{
-f.onclick=()=>{
-const a=f.querySelector(".faq-answer");
-a.style.display=a.style.display==="block"?"none":"block";
-};
-});
+document.querySelectorAll(".faq-item").forEach(f=>{f.onclick=()=>{const a=f.querySelector(".faq-answer");a.style.display=a.style.display==="block"?"none":"block";};});
 
 /* ADMIN */
 document.getElementById("adminBtn").onclick=()=>{
-if(prompt("Admin password")!=="300")return;
-document.getElementById("adminModal").style.display="flex";
-const ac=document.getElementById("adminContent");
-ac.innerHTML=`
-<h2>Add Review</h2>
-<input id="n" placeholder="Name">
-<input id="a" placeholder="Avatar (png/gif)">
-<input id="i" placeholder="Review image (png/gif)">
-<textarea id="t" placeholder="Text"></textarea>
-<button onclick="addReview()">Add</button>
-<button onclick="document.getElementById('adminModal').style.display='none'">Close</button>`;
+  if(prompt("Admin password")!=="300")return;
+  document.getElementById("adminModal").style.display="flex";
+  const ac=document.getElementById("adminContent");
+  ac.innerHTML=`
+  <h2>Admin Panel</h2>
+  <h3>Add Review</h3>
+  <input id="n" placeholder="Name">
+  <input id="a" placeholder="Avatar (png/gif)">
+  <input id="i" placeholder="Review image (png/gif)">
+  <textarea id="t" placeholder="Text"></textarea>
+  <button onclick="addReview()">Add Review</button>
+  <h3>Add Product</h3>
+  <input id="pname" placeholder="Product Name">
+  <input id="pimg" placeholder="Product Image">
+  <input id="pprice" placeholder="Price">
+  <button onclick="addProduct()">Add Product</button>
+  <button onclick="document.getElementById('adminModal').style.display='none'">Close</button>
+  `;
 };
 function addReview(){
-reviewsData.push({
-name:n.value,
-avatar:a.value,
-text:t.value,
-stars:5,
-verified:true,
-image:i.value
-});
-localStorage.setItem("reviewsData",JSON.stringify(reviewsData));
-renderReviews();
+  reviewsData.push({name:n.value,avatar:a.value,text:t.value,stars:5,verified:true,image:i.value,likes:0});
+  localStorage.setItem("reviewsData",JSON.stringify(reviewsData)); renderReviews();
 }
-
-/* LOADER */
-window.onload=()=>setTimeout(()=>loader.remove(),2400);
+function addProduct(){
+  products.push({name:pname.value,image:pimg.value,price:pprice.value,likes:0}); renderProducts();
+}
 </script>
-
 </body>
 </html>
